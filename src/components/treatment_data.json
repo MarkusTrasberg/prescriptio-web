@@ -1,0 +1,68 @@
+{
+    "cases": [
+      {
+        "illness": "pain from cancer",
+        "condition": "trouble swallowing",
+        "medicine": "transdermal fentanyl",
+        "person_name": "Emily",
+        "age": 70,
+        "gender": "female",
+        "image_url": "female_70"
+      },
+      {
+        "illness": "obstipation",
+        "condition": "child (1-6yr)",
+        "medicine": "lactulose",
+        "person_name": "Noah",
+        "age": 4,
+        "gender": "male",
+        "image_url": "male_4"
+      },
+      {
+        "illness": "depression",
+        "condition": null,
+        "medicine": "escitalopram",
+        "person_name": "James",
+        "age": 35,
+        "gender": "male",
+        "image_url": "male_35"
+      },
+      {
+        "illness": "respiratory tract infection",
+        "condition": "child (7-12 yr)",
+        "medicine": "amoxicillin/clavulanic acid",
+        "person_name": "Sophia",
+        "age": 9,
+        "gender": "female",
+        "image_url": "female_9"
+      },
+      {
+        "illness": "respiratory tract infection",
+        "condition": "allergic to penicillin",
+        "medicine": "erythromycin",
+        "person_name": "Olivia",
+        "age": 30,
+        "gender": "female",
+        "image_url": "female_30"
+      },
+      {
+        "illness": "ADHD",
+        "condition": "child (7-12 yr)",
+        "medicine": "methylphenidate",
+        "person_name": "Ethan",
+        "age": 10,
+        "gender": "male",
+        "image_url": "male_10"
+      },
+      {
+        "illness": "rheumatism",
+        "condition": null,
+        "medicine": "methotrexate",
+        "person_name": "John",
+        "age": 60,
+        "gender": "male",
+        "image_url": "male_60"
+      }
+    ]
+  }
+  
