@@ -2,9 +2,10 @@
 
 // components/PatientMedicineScreen.tsx
 import React from 'react';
+import Image from 'next/image'
 
 // If you have a type for Medicine, you can replace 'any' with that type
-type Medicine = any;
+type Medicine = string;
 
 interface MedicineProps {
   medicines: Medicine[];
@@ -84,6 +85,7 @@ export default function PatientMedicineScreen({ medicines }: MedicineProps) {
   const [currentCase, setCurrentCase] = React.useState(0);
   const [correctCases, setCorrectCases] = React.useState(0);
   const [incorrectCases, setIncorrectCases] = React.useState(0);
+  const [selectedMedicine, setSelectedMedicine] = React.useState<string | null>(null);
 
   const handleRestart = () => {
     setCurrentCase(0);
@@ -91,7 +93,8 @@ export default function PatientMedicineScreen({ medicines }: MedicineProps) {
     setIncorrectCases(0);
   }
 
-  const handleMedicineClick = (selectedMedicine: Medicine, correctMedicine: string) => {
+  const handleMedicineClick = (selectedMedicine: any, correctMedicine: string) => {
+    setSelectedMedicine(null);  
     if (selectedMedicine === correctMedicine) {
       console.log('Correct medicine selected!');
       setCorrectCases(correctCases + 1);
@@ -102,33 +105,57 @@ export default function PatientMedicineScreen({ medicines }: MedicineProps) {
     setCurrentCase(currentCase + 1);
   };
 
+  const getMedicineStyle = (medicine: string) => {
+    return `cursor-pointer hover:bg-gray-200 p-2 ${
+      selectedMedicine === medicine ? "bg-blue-100 border-blue-500 border-2" : ""
+    }`;
+  };
+
+
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="flex flex-row bg-white shadow-lg rounded-lg">
+      <div className="flex flex-row  rounded-lg">
 
         {currentCase < data.cases.length && (
-          <div className="flex-row w-[500px]">
-            <div className="p-4 w-full">
-              {/* Loop through cases and display information */}
-              <p className="text-lg"><b>Name:</b> {data.cases[currentCase].person_name}</p>
-              <p className="text-lg"><b>Age:</b> {data.cases[currentCase].age}</p>
-              <p className="text-lg"><b>Gender:</b> {data.cases[currentCase].gender}</p>
-              <p className="text-lg"><b>Illness:</b> {data.cases[currentCase].illness}</p>
-              <p className="text-lg"><b>Condition:</b> {data.cases[currentCase].condition}</p>
+          <div className="w-[1200px] flex ">
+            {/* Patient Information */}
+            <div className="flex-row w-[500px] bg-white shadow-lg">
+              <div className="p-4 w-full">
+              <h2 className="text-xl font-semibold mb-4">Patient</h2>
+                {/* Loop through cases and display information */}
+                <div className="flex justify-center items-center">
+                <Image
+                  src="/guy.png"
+                  width={150}
+                  height={150}
+                  alt="Picture of the author"
+                  
+                />
+                </div>
+                <p className="text-lg"><b>Name:</b> {data.cases[currentCase].person_name}</p>
+                <p className="text-lg"><b>Age:</b> {data.cases[currentCase].age}</p>
+                <p className="text-lg"><b>Gender:</b> {data.cases[currentCase].gender}</p>
+                <p className="text-lg"><b>Illness:</b> {data.cases[currentCase].illness}</p>
+                <p className="text-lg"><b>Condition:</b> {data.cases[currentCase].condition}</p>
+              </div>
             </div>
 
             {/* Medicines List */}
-            <div className="p-4 bg-gray-100">
+            <div className="p-4 bg-gray-100  w-[500px] flex-row">
               <h2 className="text-xl font-semibold mb-4">Medicine Book</h2>
               {medicines.map((medicine) => (
                 <p
                   key={medicine}
-                  className="cursor-pointer hover:bg-gray-200 p-2"
-                  onClick={() => handleMedicineClick(medicine, data.cases[currentCase].medicine)}
+                  className={getMedicineStyle(medicine)}
+                  onClick={() => setSelectedMedicine(medicine)}
                 >
                   {medicine}
                 </p>
               ))}
+              {selectedMedicine && (
+                <button className="mt-4 text-blue-600" onClick={() => handleMedicineClick(selectedMedicine, data.cases[currentCase].medicine)}>Continue</button>
+              )}
+              
             </div>
           </div>
         )}
